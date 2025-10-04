@@ -25,11 +25,13 @@ class Solution:
         ''' 
         #highly in efficient due to 3 loop
 
-        # hashmap? check combination in a hashmap
-        # if i < 0 check if j < 0 then if k + j + i = 0 then add
-        # if i > 0 check if j < 0 then k < 0 and k + j + i = 0
-        # if i > 0 check if j = 0 then if k + i = 0
-        # if i = 0 check if k+j = 0
+        # using a sorted array i first index, j index after i,  k = n -1
+        # if i < 0 check if j + k + i = 0
+        # if k + j + i = 0 then add
+        # sums of them > 0 decrease k
+        # sums < 0 increase j
+        # if i > 0 return 
+        # if i = 0 check if k and j = 0
         # if i = i -1 skipped
         while i < n - 2:
             j = i + 1
