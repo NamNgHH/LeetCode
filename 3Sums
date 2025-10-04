@@ -1,0 +1,58 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        i = 0
+        j = 1
+        n = len(nums)
+        k = n -1
+
+        numslist = sorted(nums)
+        list = []
+        #from first index check every combination of 3 and we need to make sure it is distinct 
+        '''
+        while i < len(nums) - 2:
+                while j < len(nums) -1:
+                    while k < len(nums):
+                        if (nums[i]+nums[j]+nums[k] == 0 and sorted([nums[i],nums[j],nums[k]]) not in list ):
+                          list.append(sorted([nums[i],nums[j],nums[k]]))
+                        k+= 1
+                    j += 1
+                    k = j+1
+                i += 1
+                j = i+1
+                k = j+1
+            
+        return list
+        ''' 
+        #highly in efficient due to 3 loop
+
+        # hashmap? check combination in a hashmap
+        # if i < 0 check if j < 0 then if k + j + i = 0 then add
+        # if i > 0 check if j < 0 then k < 0 and k + j + i = 0
+        # if i > 0 check if j = 0 then if k + i = 0
+        # if i = 0 check if k+j = 0
+        # if i = i -1 skipped
+        while i < n - 2:
+            j = i + 1
+            k = n - 1
+            if numslist[i]> 0:
+                break
+            elif i > 0 and numslist[i] == numslist[i-1]:
+                i += 1;
+                continue
+            while j < k:
+                sums = numslist[i] + numslist[j] + numslist[k];
+                if sums == 0:
+                    list.append([numslist[i],numslist[j],numslist[k]])
+                    j += 1
+                    k -= 1
+                    while j<k and numslist[j] == numslist[j-1]:
+                        j += 1
+                    while j<k and numslist[k] == numslist[k+1]:
+                        k -= 1
+                elif sums < 0:
+                    j += 1
+                else:
+                    k -= 1
+
+            i += 1;
+        return list
